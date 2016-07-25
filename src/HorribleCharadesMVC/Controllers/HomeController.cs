@@ -15,5 +15,13 @@ namespace HorribleCharadesMVC.Controllers
         {
             return View();
         }
+        public IActionResult NewGame()
+        {
+            return View();
+        }
+        public IActionResult JoinGame()
+        {
+            return View();
+        }
     }
 }
