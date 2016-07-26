@@ -13,6 +13,7 @@ namespace HorribleCharadesMVC.Models
         public static int ReturnValue(int upperBound)
         {
             return ReturnValue(0, upperBound);
+            
         }
         public static int ReturnValue(int lower, int upperBound)
         {
