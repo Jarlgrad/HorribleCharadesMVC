@@ -8,7 +8,8 @@
     "Microsoft.AspNetCore.Server.IISIntegration": "1.0.0",
     "Microsoft.AspNetCore.Server.Kestrel": "1.0.0",
     "Microsoft.AspNetCore.Mvc": "1.0.0",
-    "bootstrap": "3.3.7"
+    "bootstrap": "3.3.7",
+    "System.Data.SqlClient": "4.1.0"
   },
 
   "tools": {
