@@ -14,9 +14,11 @@ namespace HorribleCharadesMVC.Controllers
         // GET: /<controller>/
         public IActionResult Main()
         {
-            var charade = DataManager.CombineWords();
+            //var charade = DataManager.GetObject(RandomUtils.ReturnValue(0, 8));
+            
+            var charade = DataManager.CombinedWords();
 
-            return View();
+            return View(charade);
         }
     }
 }

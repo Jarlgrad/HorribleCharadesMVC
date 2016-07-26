@@ -5,11 +5,9 @@ using System.Threading.Tasks;
 
 namespace HorribleCharadesMVC.Models
 {
-    public class Object
+    public class Charade
     {
-        public int Oid { get; set; }
-
-        public string Description { get; set; }
-
+        public string charadeWord { get; set; }
+ 
     }
 }
