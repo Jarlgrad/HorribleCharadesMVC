@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace HorribleCharadesMVC.Models
 {
-    public class HCDB
+    public class DataManager
     {
     }
 }
