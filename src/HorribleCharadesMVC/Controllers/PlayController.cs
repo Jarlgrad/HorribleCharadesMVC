@@ -11,7 +11,7 @@ namespace HorribleCharadesMVC.Controllers
     public class PlayController : Controller
     {
         // GET: /<controller>/
-        public IActionResult Index()
+        public IActionResult Main()
         {
             return View();
         }
