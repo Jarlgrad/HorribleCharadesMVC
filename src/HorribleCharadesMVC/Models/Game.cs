@@ -7,6 +7,10 @@ namespace HorribleCharadesMVC.Models
 {
     public class Game
     {
+        public Game()
+        {
+            GenerateCode();
+        }
         public List<Player> Teams { get; set; }
         public string Code { get; private set; }
         public void GenerateCode()

@@ -19,7 +19,6 @@ namespace HorribleCharadesMVC.Controllers
         public IActionResult NewGame()
         {
             Game game = new Game();
-            game.GenerateCode();
             return View(game);
         }
         public IActionResult JoinGame()
