@@ -1,12 +1,16 @@
-﻿<html xmlns="http://www.w3.org/1999/xhtml">
+﻿@model HorribleCharadesMVC.Models.Game
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>New Game HC</title>
 </head>
 <body>
     <div><h1>NewGameView</h1></div>
     <div>
+        <p>Code to Join: [@Model.Code]</p>
+        <br />
         <input type="button" value="Play" onclick="@("window.location.href='" + @Url.Action("Main", "Play") + "'");" />
-        @Html.ActionLink("Play", "Main", "Play")
+        
+
     </div>
 </body>
 </html>
