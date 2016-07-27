@@ -1,0 +1,15 @@
+﻿<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Horrible Charades - Home</title>
+</head>
+<body>
+    <div><h1>Welcome to Horrible Charades</h1></div>
+    <div>
+        <input type="button" value="New Game" onclick="@("window.location.href='" + @Url.Action("NewGame", "Home") + "'");" />
+    </div>
+    <div>
+        <input type="button" value="Join Game" onclick="@("window.location.href='" + @Url.Action("JoinGame", "Home") + "'");" />
+        @Html.ActionLink("JoinGame", "JoinGame", "Home")
+    </div>
+</body>
+</html>

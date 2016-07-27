@@ -39,7 +39,9 @@
   "publishOptions": {
     "include": [
       "wwwroot",
-      "web.config"
+      "web.config",
+      "/Views/Home/Index.cshtml",
+      "/Views/Shared/Index.cshtml"
     ]
   },
 
