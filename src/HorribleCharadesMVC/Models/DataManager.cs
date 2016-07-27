@@ -17,7 +17,7 @@ namespace HorribleCharadesMVC.Models
 
             SqlConnection myConnection = new SqlConnection(conStr);
 
-            SqlCommand myCommand = new SqlCommand("select * from Object WHERE ID=" + id, myConnection);
+            SqlCommand myCommand = new SqlCommand("select * from Objects WHERE ID=" + id, myConnection);
 
             try
             {
@@ -50,7 +50,7 @@ namespace HorribleCharadesMVC.Models
             Activity activityWord = new Activity();
 
             SqlConnection myConnection = new SqlConnection(conStr);
-            SqlCommand myCommand = new SqlCommand("select * from activity WHERE ID=" + id, myConnection);
+            SqlCommand myCommand = new SqlCommand("select * from activities WHERE ID=" + id, myConnection);
 
             try
             {
@@ -81,8 +81,8 @@ namespace HorribleCharadesMVC.Models
         public static Charade CombinedWords()
         {
             Charade charade = new Charade();
-            Object wordObject = DataManager.GetObject(RandomUtils.ReturnValue(1, 8));
-            Activity wordActivity = DataManager.GetActivity(RandomUtils.ReturnValue(1, 8));
+            Object wordObject = DataManager.GetObject(RandomUtils.ReturnValue(1, 19));
+            Activity wordActivity = DataManager.GetActivity(RandomUtils.ReturnValue(1, 19));
 
             charade.charadeWord = $"{wordObject.Description} {wordActivity.Description}";
 
