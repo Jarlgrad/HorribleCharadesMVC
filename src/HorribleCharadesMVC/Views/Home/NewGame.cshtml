@@ -8,6 +8,11 @@
     <div>
         <p>Code to Join: [@Model.Code]</p>
         <br />
+        <label>TeamName</label> @*Borde ändra label- och inputtaggarna till en asp label med ett attribut i viewModel sen*@
+        <br />
+        <input type="text" name="teamName" placeholder="Team1" />
+        <br />
+        <br />
         <input type="button" value="Play" onclick="@("window.location.href='" + @Url.Action("Main", "Play") + "'");" />
         
 

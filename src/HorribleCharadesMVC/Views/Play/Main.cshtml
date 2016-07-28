@@ -1,10 +1,33 @@
 ﻿@model HorribleCharadesMVC.Models.Charade
 
+@*TODO
+    Fixa en stop button som skickar dem till nästa view*@
+
+<script>
+    //Scripts taggarna ska flyttas ut till en scriptfil. Kom ihåg att hänvisa till filen när vi flyttar it taggen också.
+    var timeLeft = 10;
+    var counter = setInterval(timer, 1000);
+    function timer()
+    {
+        timeLeft -= 1;
+        if (timeLeft <= 0)
+        {
+            clearInterval(counter);
+            document.getElementById("timer").innerHTML = "Timer Ended" //Här ska vi skicka vidare användaren till nästa view
+            return;
+        }
+        document.getElementById("timer").innerHTML = "00:" + timeLeft < 10 ? "0" + timeLeft : timeLeft;
+    }
+
+</script>
+
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title></title>
 </head>
 <body>
+    <span id="timer" style="font-size:3em; color:magenta; margin-left: 3em"></span>
+    <br />
     <h1> Your Charade is... </h1>
     <p>@Model.charadeWord</p>
 </body>
