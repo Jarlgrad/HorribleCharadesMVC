@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace HorribleCharadesMVC.Models
 {
-    public class Object
+    public class Entity
     {
         public int Oid { get; set; }
 
