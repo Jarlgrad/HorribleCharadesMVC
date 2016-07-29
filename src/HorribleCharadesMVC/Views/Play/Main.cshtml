@@ -13,13 +13,14 @@
         if (timeLeft <= 0)
         {
             clearInterval(counter);
-            document.getElementById("timer").innerHTML = "Timer Ended" //Här ska vi skicka vidare användaren till nästa view
+            document.getElementById("timer").innerHTML = "Time is up!" //Här ska vi skicka vidare användaren till nästa view
             return;
         }
         document.getElementById("timer").innerHTML = "00:" + timeLeft < 10 ? "0" + timeLeft : timeLeft;
     }
 
 </script>
+
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
