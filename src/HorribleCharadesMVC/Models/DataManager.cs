@@ -1,6 +1,7 @@
 ﻿using HorribleCharadesMVC.Viewmodels;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
@@ -122,33 +123,63 @@ namespace HorribleCharadesMVC.Models
 
     }
 
-    public static void AddTeam(string gameCode, string name)
-    {
-        Team team = new Team();
+        //public static void AddTeam(string gameCode, string name)
+        //{
+        //    Team team = new Team();
 
-        SqlConnection myConnection = new SqlConnection(conStr);
+        //    SqlConnection myConnection = new SqlConnection(conStr);
 
-        SqlCommand myCommand = new SqlCommand($"insert into Teams VALUES ('{gameCode}','{name}' )", myConnection);
+        //    SqlCommand myCommand = new SqlCommand($"insert into Teams VALUES ('{gameCode}','{name}' )", myConnection);
 
-        try
+        //    try
+        //    {
+        //        myConnection.Open();
+
+        //        int result = myCommand.ExecuteNonQuery();
+
+        //    }
+        //    catch (Exception ex)
+        //    {
+
+        //    }
+        //    finally
+        //    {
+        //        myConnection.Close();
+        //    }
+        //}
+        public static void AddTeam(string gameCode, string name)
         {
-            myConnection.Open();
+            Team team = new Team();
 
-            int result = myCommand.ExecuteNonQuery();
+            SqlConnection myConnection = new SqlConnection(conStr);
 
-        }
-        catch (Exception ex)
-        {
+            SqlCommand myCommand = new SqlCommand("sp_AddTeam", myConnection);
+            myCommand.CommandType = CommandType.StoredProcedure;
 
+            SqlParameter paramGameCode = new SqlParameter("@GameCode", SqlDbType.VarChar);
+            myCommand.Parameters.Add("@GameCode", SqlDbType.VarChar).Value = gameCode;
+
+            SqlParameter paramName = new SqlParameter("@Name", SqlDbType.VarChar);
+            myCommand.Parameters.Add("@Name", SqlDbType.VarChar).Value = name;
+
+            try
+            {
+                myConnection.Open();
+
+                myCommand.ExecuteNonQuery();
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+            finally
+            {
+                myConnection.Close();
+            }
         }
-        finally
-        {
-            myConnection.Close();
-        }
+
     }
-
-
-}
 }
 
 

@@ -1,22 +1,27 @@
-﻿@model HorribleCharadesMVC.Models.Game
+﻿@model HorribleCharadesMVC.Viewmodels.Home.NewGameViewModel
 <html xmlns="http://www.w3.org/1999/xhtml">
-@Html.Hidden(Model.Code)
+@*@Html.Hidden(Model.Code)*@
 <head>
     <title>New Game HC</title>
 </head>
 <body>
     <div><h1>NewGameView</h1></div>
     <div>
-        <p>Code to Join: [@Model.Code]</p>
+        <p>Code to Join: [@Model.GameCode]</p>
         <br />
         <label>TeamName</label> @*Borde ändra label- och inputtaggarna till en asp label med ett attribut i viewModel sen*@
         <br />
         <input type="text" name="teamName" placeholder="Team1" />
         <br />
         <br />
-        <input type="button" value="Play" onclick="@("window.location.href='" + @Url.Action("Main", "Play") + "'");" />
-        
+
+            @*<input type="submit" value="Play" onclick="@("window.location.href='" + @Url.Action("Main", "Play") + "'");" />*@
+        <form action="/home/NewGame">
+            <input type="submit" value="Play" />
+            <input id="GameCode" type="hidden" value="@Model.GameCode" />
+        </form>
 
     </div>
 </body>
 </html>
+@*<a href="~/Views/Home/NewGame.cshtml">~/Views/Home/NewGame.cshtml</a>*@

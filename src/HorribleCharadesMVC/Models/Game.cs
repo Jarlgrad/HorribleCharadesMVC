@@ -13,7 +13,6 @@ namespace HorribleCharadesMVC.Models
             Teams = new List<Team>();
             Teams.Add(new Team { TeamName = "Team1", TeamId = 1});
 
-
         }
         public List<Team> Teams { get; set; }
         public string Code { get; private set; }

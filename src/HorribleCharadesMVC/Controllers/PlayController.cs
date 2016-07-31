@@ -13,20 +13,21 @@ namespace HorribleCharadesMVC.Controllers
     public class PlayController : Controller
     {
         // GET: /<controller>/
-        public IActionResult Main(Game game)
+        public IActionResult Main()
         {
             MainViewModel MainVM = new MainViewModel()
             {
                 charadeWord = DataManager.CombinedWords(),
-                game = game
+                //GameCode = game.Code
             };
 
             return View(MainVM);
         }
 
-        public IActionResult Score(Game game)
+        public IActionResult Score()
         {
-            var team = DataManager.GetTeams(game.Code);
+            //game.Teams
+            //var team = DataManager.GetTeams(game.Code);
             return View();
         }
     }

@@ -9,6 +9,6 @@ namespace HorribleCharadesMVC.Viewmodels
     public class MainViewModel
     {
         public string charadeWord { get; set; }
-        public Game game { get; set; }
+        public string GameCode { get; set; }
     }
 }
