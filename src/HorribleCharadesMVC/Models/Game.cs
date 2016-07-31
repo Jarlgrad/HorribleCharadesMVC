@@ -11,7 +11,8 @@ namespace HorribleCharadesMVC.Models
         {
             GenerateCode();
             Teams = new List<Player>();
-            Teams.Add(new Player { PlayerName = "Team1" });
+            Teams.Add(new Player { PlayerName = "Team1", PlayerId = 1});
+            Teams.Add(new Player { PlayerName = "Team2", PlayerId = 2 });
 
         }
         public List<Player> Teams { get; set; }

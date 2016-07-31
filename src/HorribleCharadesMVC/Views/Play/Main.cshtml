@@ -5,7 +5,7 @@
 
 <script>
     //Scripts taggarna ska flyttas ut till en scriptfil. Kom ihåg att hänvisa till filen när vi flyttar it taggen också.
-    var timeLeft = 10;
+    var timeLeft = 3;
     var counter = setInterval(timer, 1000);
     function timer()
     {
@@ -14,12 +14,18 @@
         {
             clearInterval(counter);
             document.getElementById("timer").innerHTML = "Time is up!" //Här ska vi skicka vidare användaren till nästa view
+            redirect();
             return;
         }
         document.getElementById("timer").innerHTML = "00:" + timeLeft < 10 ? "0" + timeLeft : timeLeft;
     }
 
+    function redirect() {
+        window.location.href = '/Play/Score';
+    }
+
 </script>
+
 
 
 <html xmlns="http://www.w3.org/1999/xhtml">

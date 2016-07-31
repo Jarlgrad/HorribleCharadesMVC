@@ -1,7 +1,23 @@
 ﻿<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title></title>
+    <title>Score</title>
 </head>
 <body>
+
+    <h2>Team X</h2>
+    <h3>GUESSSED</h3>
+    <h3>TIME </h3>
+    <h3>POINTS</h3>
+    <br />
+    <input type="button" value="Next" onclick="@("window.location.href='" + @Url.Action("Score", "Play") + "'");" />
+
+    <script>
+
+        function loopTeams(id) {
+            var url = '@Url.Action("Score", "Play", new { id = "__id__" })';
+            window.location.href = url.replace('__id__', id);
+        }
+    </script>
+
 </body>
 </html>

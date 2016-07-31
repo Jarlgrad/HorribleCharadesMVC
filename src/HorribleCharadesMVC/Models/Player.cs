@@ -12,5 +12,12 @@ namespace HorribleCharadesMVC.Models
         public string PlayerName { get; set; }
 
         public int PlayerId { get; set; }
+
+        public string charadeGuess { get; set; }
+
+        public int Points { get; set; }
+
+        public double GuessTime { get; set; }
+
     }
 }

@@ -20,5 +20,11 @@ namespace HorribleCharadesMVC.Controllers
 
             return View(charade);
         }
+
+        public IActionResult Score()
+        {
+
+            return View();
+        }
     }
 }
