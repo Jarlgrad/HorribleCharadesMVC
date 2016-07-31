@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace HorribleCharadesMVC.Models
+namespace HorribleCharadesMVC.Viewmodels
 {
-    public class Charade
+    public class MainViewModel
     {
         public string charadeWord { get; set; }
- 
     }
 }

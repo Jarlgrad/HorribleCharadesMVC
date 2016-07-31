@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HorribleCharadesMVC.Viewmodels;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
@@ -78,9 +79,9 @@ namespace HorribleCharadesMVC.Models
         }
         #endregion
 
-        public static Charade CombinedWords()
+        public static MainViewModel CombinedWords()
         {
-            Charade charade = new Charade();
+            MainViewModel charade = new MainViewModel();
             Entity wordEntity = DataManager.GetEntity(RandomUtils.ReturnValue(1, 19));
             Activity wordActivity = DataManager.GetActivity(RandomUtils.ReturnValue(1, 19));
 
