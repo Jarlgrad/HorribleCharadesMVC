@@ -13,29 +13,28 @@ namespace HorribleCharadesMVC.Models
         const string conStr = "Data Source=horriblecharades.database.windows.net;Initial Catalog = HorribleCharades; Persist Security Info=True;User ID = DBAdmin; Password=this!s4password";
 
         #region GetWordsFromDB
+
+       
         public static Entity GetEntity(int id)
         {
             Entity objectword = new Entity();
 
             SqlConnection myConnection = new SqlConnection(conStr);
 
-            SqlCommand myCommand = new SqlCommand("select * from Entities WHERE ID=" + id, myConnection);
+            SqlDataReader rdr = null;
+
+            SqlCommand myCommand = new SqlCommand("sp_GetEntity", myConnection);
+            myCommand.CommandType = CommandType.StoredProcedure;
+            myCommand.Parameters.AddWithValue("@ID", id);
+            myCommand.Parameters.Add("@Description", SqlDbType.VarChar, 250);
+            myCommand.Parameters["@Description"].Direction = ParameterDirection.Output;
 
             try
             {
                 myConnection.Open();
-
-                SqlDataReader myReader = myCommand.ExecuteReader();
-
-                while (myReader.Read())
-                {
-                    int objectId = (int)myReader["ID"];
-                    string objectDescription = myReader["Description"].ToString();
-
-                    objectword.Oid = objectId;
-                    objectword.Description = objectDescription;
-                }
-            }
+                rdr = myCommand.ExecuteReader();
+                objectword.Description = myCommand.Parameters["@Description"].Value.ToString();
+                      }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
@@ -83,23 +82,23 @@ namespace HorribleCharadesMVC.Models
     {
         Activity activityWord = new Activity();
 
-        SqlConnection myConnection = new SqlConnection(conStr);
-        SqlCommand myCommand = new SqlCommand("select * from activities WHERE ID=" + id, myConnection);
 
-        try
+            SqlConnection myConnection = new SqlConnection(conStr);
+
+            SqlDataReader rdr = null;
+
+            SqlCommand myCommand = new SqlCommand("sp_GetActivity", myConnection);
+            myCommand.CommandType = CommandType.StoredProcedure;
+            myCommand.Parameters.AddWithValue("@ID", id);
+            myCommand.Parameters.Add("@Description", SqlDbType.VarChar, 250);
+            myCommand.Parameters["@Description"].Direction = ParameterDirection.Output;
+
+            try
         {
-            myConnection.Open();
-
-            SqlDataReader myReader = myCommand.ExecuteReader();
-            while (myReader.Read())
-            {
-                int activityId = (int)myReader["ID"];
-                string activityDescription = myReader["Description"].ToString();
-
-                activityWord.Aid = activityId;
-                activityWord.Description = activityDescription;
+                myConnection.Open();
+                rdr = myCommand.ExecuteReader();
+                activityWord.Description = myCommand.Parameters["@Description"].Value.ToString();
             }
-        }
         catch (Exception ex)
         {
 
@@ -123,30 +122,6 @@ namespace HorribleCharadesMVC.Models
 
     }
 
-        //public static void AddTeam(string gameCode, string name)
-        //{
-        //    Team team = new Team();
-
-        //    SqlConnection myConnection = new SqlConnection(conStr);
-
-        //    SqlCommand myCommand = new SqlCommand($"insert into Teams VALUES ('{gameCode}','{name}' )", myConnection);
-
-        //    try
-        //    {
-        //        myConnection.Open();
-
-        //        int result = myCommand.ExecuteNonQuery();
-
-        //    }
-        //    catch (Exception ex)
-        //    {
-
-        //    }
-        //    finally
-        //    {
-        //        myConnection.Close();
-        //    }
-        //}
         public static void AddTeam(string gameCode, string name)
         {
             Team team = new Team();
