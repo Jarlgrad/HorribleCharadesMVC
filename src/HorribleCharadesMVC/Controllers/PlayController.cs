@@ -13,7 +13,7 @@ namespace HorribleCharadesMVC.Controllers
     public class PlayController : Controller
     {
         // GET: /<controller>/
-        public IActionResult Main()
+        public IActionResult Main(string gameCode)
         {
             MainViewModel MainVM = new MainViewModel()
             {

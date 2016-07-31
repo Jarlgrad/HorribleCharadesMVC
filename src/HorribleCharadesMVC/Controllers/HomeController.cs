@@ -20,7 +20,8 @@ namespace HorribleCharadesMVC.Controllers
         public IActionResult NewGame()
         {
             Game game = new Game();
-            
+
+            this.HttpContext.Session["GameCode"] = game.Code;
             DataManager.AddTeam(game.Code, game.Teams[0].TeamName); //Kom ihåg att ändra adda teams till SQL
             var viewModel = new NewGameViewModel()
             {
@@ -32,12 +33,7 @@ namespace HorribleCharadesMVC.Controllers
         [HttpPost]
         public IActionResult NewGame(string gameCode)
         {
-            Game game = new Game();
-
-            DataManager.AddTeam(game.Code, game.Teams[0].TeamName); //Kom ihåg att ändra adda teams till SQL
-
             return RedirectToAction(nameof(PlayController.Main));
-
         }
         public IActionResult JoinGame()
         {
