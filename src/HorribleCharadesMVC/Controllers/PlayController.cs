@@ -27,7 +27,7 @@ namespace HorribleCharadesMVC.Controllers
         public IActionResult Score(Game game)
         {
             var team = DataManager.GetTeams(game.Code);
-            return View(team[0]);
+            return View();
         }
     }
 }

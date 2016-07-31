@@ -9,10 +9,10 @@ namespace HorribleCharadesMVC.Models
     {
         public Game()
         {
-            GenerateCode();
+            GenerateCode(); //Generate Code ska inte finnas här
             Teams = new List<Team>();
             Teams.Add(new Team { TeamName = "Team1", TeamId = 1});
-           
+
 
         }
         public List<Team> Teams { get; set; }
