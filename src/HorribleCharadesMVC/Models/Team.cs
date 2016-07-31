@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace HorribleCharadesMVC.Models
 {
-    public class Player
+    public class Team
     {
         [Required(ErrorMessage = "Enter a player name")]
-        public string PlayerName { get; set; }
+        public string TeamName { get; set; }
 
-        public int PlayerId { get; set; }
+        public int TeamId { get; set; }
 
         public string charadeGuess { get; set; }
 

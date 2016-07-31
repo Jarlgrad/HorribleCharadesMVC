@@ -19,7 +19,10 @@ namespace HorribleCharadesMVC.Controllers
         public IActionResult NewGame()
         {
             Game game = new Game();
+            DataManager.AddTeam(game.Code, game.Teams[0].TeamName);
+
             return View(game);
+         
         }
         public IActionResult JoinGame()
         {

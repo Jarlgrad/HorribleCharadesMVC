@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using HorribleCharadesMVC.Models;
+using HorribleCharadesMVC.Viewmodels;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -12,19 +13,21 @@ namespace HorribleCharadesMVC.Controllers
     public class PlayController : Controller
     {
         // GET: /<controller>/
-        public IActionResult Main()
+        public IActionResult Main(Game game)
         {
-            //var charade = DataManager.GetObject(RandomUtils.ReturnValue(0, 8));
-            
-            var charade = DataManager.CombinedWords();
+            MainViewModel MainVM = new MainViewModel()
+            {
+                charadeWord = DataManager.CombinedWords(),
+                game = game
+            };
 
-            return View(charade);
+            return View(MainVM);
         }
 
-        public IActionResult Score()
+        public IActionResult Score(Game game)
         {
-
-            return View();
+            var team = DataManager.GetTeams(game.Code);
+            return View(team[0]);
         }
     }
 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HorribleCharadesMVC.Models
 {
-    public class DataManager
+    public static class DataManager
     {
         const string conStr = "Data Source=horriblecharades.database.windows.net;Initial Catalog = HorribleCharades; Persist Security Info=True;User ID = DBAdmin; Password=this!s4password";
 
@@ -46,12 +46,14 @@ namespace HorribleCharadesMVC.Models
             return objectword;
         }
 
-        public static Activity GetActivity(int id)
+        public static List<Team> GetTeams(string gameCode)
         {
-            Activity activityWord = new Activity();
+            List<Team> tmpList = new List<Team>();
+
+            Team tmpTeam = new Team();
 
             SqlConnection myConnection = new SqlConnection(conStr);
-            SqlCommand myCommand = new SqlCommand("select * from activities WHERE ID=" + id, myConnection);
+            SqlCommand myCommand = new SqlCommand($"select * from Teams WHERE GameCode = '{gameCode}'", myConnection);
 
             try
             {
@@ -60,11 +62,9 @@ namespace HorribleCharadesMVC.Models
                 SqlDataReader myReader = myCommand.ExecuteReader();
                 while (myReader.Read())
                 {
-                    int activityId = (int)myReader["ID"];
-                    string activityDescription = myReader["Description"].ToString();
-
-                    activityWord.Aid = activityId;
-                    activityWord.Description = activityDescription;
+                    tmpTeam.TeamId = (int)myReader["TeamID"];
+                    tmpTeam.TeamName = myReader["Name"].ToString();
+                    tmpList.Add(tmpTeam);
                 }
             }
             catch (Exception ex)
@@ -75,22 +75,80 @@ namespace HorribleCharadesMVC.Models
             {
                 myConnection.Close();
             }
-            return activityWord;
+            return tmpList;
         }
-        #endregion
 
-        public static MainViewModel CombinedWords()
+    public static Activity GetActivity(int id)
+    {
+        Activity activityWord = new Activity();
+
+        SqlConnection myConnection = new SqlConnection(conStr);
+        SqlCommand myCommand = new SqlCommand("select * from activities WHERE ID=" + id, myConnection);
+
+        try
         {
-            MainViewModel charade = new MainViewModel();
-            Entity wordEntity = DataManager.GetEntity(RandomUtils.ReturnValue(1, 19));
-            Activity wordActivity = DataManager.GetActivity(RandomUtils.ReturnValue(1, 19));
+            myConnection.Open();
 
-            charade.charadeWord = $"{wordEntity.Description} {wordActivity.Description}";
+            SqlDataReader myReader = myCommand.ExecuteReader();
+            while (myReader.Read())
+            {
+                int activityId = (int)myReader["ID"];
+                string activityDescription = myReader["Description"].ToString();
 
-            return charade;
+                activityWord.Aid = activityId;
+                activityWord.Description = activityDescription;
+            }
+        }
+        catch (Exception ex)
+        {
 
+        }
+        finally
+        {
+            myConnection.Close();
+        }
+        return activityWord;
+    }
+    #endregion
+
+    public static string CombinedWords()
+    {
+        Entity wordEntity = DataManager.GetEntity(RandomUtils.ReturnValue(1, 19));
+        Activity wordActivity = DataManager.GetActivity(RandomUtils.ReturnValue(1, 19));
+
+        string charade = $"{wordEntity.Description} {wordActivity.Description}";
+
+        return charade;
+
+    }
+
+    public static void AddTeam(string gameCode, string name)
+    {
+        Team team = new Team();
+
+        SqlConnection myConnection = new SqlConnection(conStr);
+
+        SqlCommand myCommand = new SqlCommand($"insert into Teams VALUES ('{gameCode}','{name}' )", myConnection);
+
+        try
+        {
+            myConnection.Open();
+
+            int result = myCommand.ExecuteNonQuery();
+
+        }
+        catch (Exception ex)
+        {
+
+        }
+        finally
+        {
+            myConnection.Close();
         }
     }
+
+
+}
 }
 
 

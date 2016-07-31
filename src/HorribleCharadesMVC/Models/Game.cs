@@ -10,12 +10,12 @@ namespace HorribleCharadesMVC.Models
         public Game()
         {
             GenerateCode();
-            Teams = new List<Player>();
-            Teams.Add(new Player { PlayerName = "Team1", PlayerId = 1});
-            Teams.Add(new Player { PlayerName = "Team2", PlayerId = 2 });
+            Teams = new List<Team>();
+            Teams.Add(new Team { TeamName = "Team1", TeamId = 1});
+           
 
         }
-        public List<Player> Teams { get; set; }
+        public List<Team> Teams { get; set; }
         public string Code { get; private set; }
         public void GenerateCode()
             //Genererar en kod som användare skriver in för att komma in på samma spel

@@ -1,4 +1,5 @@
 ﻿@model HorribleCharadesMVC.Viewmodels.MainViewModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
 @*TODO
     Fixa en stop button som skickar dem till nästa view*@
@@ -21,13 +22,13 @@
     }
 
     function redirect() {
-        window.location.href = '/Play/Score';
+        window.location.href = '/Play/Score/1';
     }
 
 </script>
 
 
-
+@Html.Hidden(Model.game.Code)
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title></title>

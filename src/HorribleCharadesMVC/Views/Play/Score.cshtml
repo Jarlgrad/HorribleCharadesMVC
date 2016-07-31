@@ -1,23 +1,27 @@
 ﻿<html xmlns="http://www.w3.org/1999/xhtml">
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model HorribleCharadesMVC.Viewmodels.Play.ScoreViewModel
+@*@Html.Hidden(Model.game.Code)*@
+
 <head>
     <title>Score</title>
 </head>
 <body>
 
-    <h2>Team X</h2>
+    <h2>Team X, @Model.Team.TeamName</h2>
     <h3>GUESSSED</h3>
     <h3>TIME </h3>
     <h3>POINTS</h3>
     <br />
-    <input type="button" value="Next" onclick="@("window.location.href='" + @Url.Action("Score", "Play") + "'");" />
+    <input type="button" value="Next" onclick="@("window.location.href='" + @Url.Action("Score", "Play", new { id = 2  @*@Model.Team.PlayerId++*@ }) + "'");" />
 
-    <script>
+    @*<script>
 
         function loopTeams(id) {
             var url = '@Url.Action("Score", "Play", new { id = "__id__" })';
             window.location.href = url.replace('__id__', id);
         }
-    </script>
+    </script>*@
 
 </body>
 </html>
