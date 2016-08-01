@@ -21,7 +21,7 @@ namespace HorribleCharadesMVC.Controllers
         {
             Game game = new Game();
             
-            DataManager.AddTeam(game.Code, game.Teams[0].TeamName); //Kom ihåg att ändra adda teams till SQL
+            DataManager.AddTeam(game.Code, game.Teams[0].TeamName); 
             var viewModel = new NewGameViewModel()
             {
                 GameCode = game.Code
