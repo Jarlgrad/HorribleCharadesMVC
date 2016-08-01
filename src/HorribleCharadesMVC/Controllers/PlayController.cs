@@ -13,7 +13,7 @@ namespace HorribleCharadesMVC.Controllers
     public class PlayController : Controller
     {
         // GET: /<controller>/
-        public IActionResult Main()
+        public IActionResult Main(string id)
         {
             MainViewModel MainVM = new MainViewModel()
             {
@@ -24,7 +24,7 @@ namespace HorribleCharadesMVC.Controllers
             return View(MainVM);
         }
 
-        public IActionResult Score()
+        public IActionResult Score(string id)
         {
             //game.Teams
             //var team = DataManager.GetTeams(game.Code);
