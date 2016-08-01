@@ -12,7 +12,7 @@ namespace HorribleCharadesMVC.Models
     {
         const string conStr = "Data Source=horriblecharades.database.windows.net;Initial Catalog = HorribleCharades; Persist Security Info=True;User ID = DBAdmin; Password=this!s4password";
 
-        #region GetWordsFromDB
+        #region GetFromDB
 
        
         public static Entity GetEntity(int id)
@@ -53,19 +53,30 @@ namespace HorribleCharadesMVC.Models
             Team tmpTeam = new Team();
 
             SqlConnection myConnection = new SqlConnection(conStr);
-            SqlCommand myCommand = new SqlCommand($"select * from Teams WHERE GameCode = '{gameCode}'", myConnection);
+
+            SqlDataReader rdr = null;
+
+            SqlCommand myCommand = new SqlCommand("sp_GetTeam", myConnection);
+            myCommand.CommandType = CommandType.StoredProcedure;
+            myCommand.Parameters.AddWithValue("@GameCode", gameCode);
+            myCommand.Parameters.Add("@TeamID", SqlDbType.Int);
+            myCommand.Parameters["@TeamID"].Direction = ParameterDirection.Output;
+            myCommand.Parameters.Add("@Name", SqlDbType.VarChar, 250);
+            myCommand.Parameters["@Name"].Direction = ParameterDirection.Output;
 
             try
             {
-                myConnection.Open();
 
-                SqlDataReader myReader = myCommand.ExecuteReader();
-                while (myReader.Read())
+                myConnection.Open();
+                rdr = myCommand.ExecuteReader();
+
+                while (rdr.Read())
                 {
-                    tmpTeam.TeamId = (int)myReader["TeamID"];
-                    tmpTeam.TeamName = myReader["Name"].ToString();
+                    tmpTeam.TeamId = (int)myCommand.Parameters["@TeamID"].Value;
+                    tmpTeam.TeamName = myCommand.Parameters["@Name"].Value.ToString();
                     tmpList.Add(tmpTeam);
                 }
+      
             }
             catch (Exception ex)
             {
@@ -111,17 +122,7 @@ namespace HorribleCharadesMVC.Models
     }
     #endregion
 
-    public static string CombinedWords()
-    {
-        Entity wordEntity = DataManager.GetEntity(RandomUtils.ReturnValue(1, 19));
-        Activity wordActivity = DataManager.GetActivity(RandomUtils.ReturnValue(1, 19));
-
-        string charade = $"{wordEntity.Description} {wordActivity.Description}";
-
-        return charade;
-
-    }
-
+        #region AddToDB
         public static void AddTeam(string gameCode, string name)
         {
             Team team = new Team();
@@ -152,6 +153,18 @@ namespace HorribleCharadesMVC.Models
             {
                 myConnection.Close();
             }
+        }
+        #endregion
+
+        public static string CombinedWords()
+        {
+            Entity wordEntity = DataManager.GetEntity(RandomUtils.ReturnValue(1, 19));
+            Activity wordActivity = DataManager.GetActivity(RandomUtils.ReturnValue(1, 19));
+
+            string charade = $"{wordEntity.Description} {wordActivity.Description}";
+
+            return charade;
+
         }
 
     }
