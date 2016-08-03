@@ -25,11 +25,21 @@ namespace HorribleCharadesMVC.Controllers
             return View(MainVM);
         }
 
-        public IActionResult Score(string id)
+        public IActionResult Score()
         {
             ScoreViewModel ScoreVM = new ScoreViewModel()
             {
-                Teams = new List<Team>(DataManager.GetTeams(id)),
+                GameCode = "TONIS",
+                Teams = DataManager.GetTeamsTest()
+            };
+            return View(ScoreVM);
+        }
+        public IActionResult Standing()
+        {
+            ScoreViewModel ScoreVM = new ScoreViewModel()
+            {
+                GameCode = "TONIS",
+                Teams = DataManager.GetTeamsTest()
             };
             return View(ScoreVM);
         }

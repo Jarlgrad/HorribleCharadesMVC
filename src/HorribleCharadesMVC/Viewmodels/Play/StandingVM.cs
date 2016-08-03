@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace HorribleCharadesMVC.Viewmodels.Play
 {
-    public class ScoreViewModel
+    public class StandingVM
     {
-        public List<Team> Teams;
         public string GameCode { get; set; }
+        public List<Team> Teams { get; set; }
     }
 }

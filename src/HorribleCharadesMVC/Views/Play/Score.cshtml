@@ -8,7 +8,7 @@
 </head>
 <body>
 
-    <h2>Team X, @Model.Teams[0]</h2>
+    <h2>Team X, @Model.Teams[0].TeamName</h2>
     <h3>GUESSSED</h3>
     <h3>TIME </h3>
     <h3>POINTS</h3>
@@ -22,6 +22,28 @@
             window.location.href = url.replace('__id__', id);
         }
     </script>*@
+
+    <script>
+    //Scripts taggarna ska flyttas ut till en scriptfil. Kom ihåg att hänvisa till filen när vi flyttar it taggen också.
+    var timeLeft = 3;
+    var counter = setInterval(timer, 1000);
+    function timer()
+    {
+        timeLeft -= 1;
+        if (timeLeft <= 0)
+        {
+            clearInterval(counter);
+            document.getElementById("timer").innerHTML = "Time is up!" //Här ska vi skicka vidare användaren till nästa view
+            redirect();
+            return;
+        }
+    }
+
+    function redirect() {
+        window.location.href = '/Play/Score/@Model.GameCode';
+    }
+
+    </script>
 
 </body>
 </html>

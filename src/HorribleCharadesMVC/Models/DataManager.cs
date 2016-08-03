@@ -209,6 +209,44 @@ namespace HorribleCharadesMVC.Models
 
         }
 
+        public static List<Team> GetTeamsTest()
+        {
+            List<Team> tmpList = new List<Team>();
+            SqlConnection myConnection = new SqlConnection("Data Source=horriblecharades.database.windows.net;Initial Catalog = HorribleCharades; Persist Security Info=True;User ID = DBAdmin; Password=this!s4password");
+            try
+            {
+                SqlCommand myCommand = new SqlCommand();
+
+                string strCmd = @"select * from Teams where GameCode = 'TONIS'";
+
+                myCommand.CommandText = strCmd;
+
+                myCommand.Connection = myConnection;
+
+                myConnection.Open();
+
+                SqlDataReader myReader = myCommand.ExecuteReader(); //Alt. SqlDataReader
+
+                while (myReader.Read())
+                {
+                    tmpList.Add(new Team
+                    {
+                        TeamName = (string)myReader["Name"]
+                    });
+                    //Console.WriteLine(myReader["FirstName"] + " " + myReader["Street"] + " " + myReader["Country"]); // Console.WriteLine(myReader[0]); // 
+                    //Console.WriteLine(myReader[0]);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                myConnection.Close();
+            }
+            return tmpList;
+        }
     }
 }
 
