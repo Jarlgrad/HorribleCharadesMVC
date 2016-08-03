@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using HorribleCharadesMVC.Models;
 using HorribleCharadesMVC.Viewmodels.Home;
+using Microsoft.AspNetCore.Http;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -26,6 +27,8 @@ namespace HorribleCharadesMVC.Controllers
             {
                 GameCode = game.Code
             };
+
+            HttpContext.Session.SetString("GameCode", "TONIS");
             return View(viewModel);
          
         }

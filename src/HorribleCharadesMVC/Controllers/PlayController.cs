@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using HorribleCharadesMVC.Models;
 using HorribleCharadesMVC.Viewmodels;
 using HorribleCharadesMVC.Viewmodels.Play;
+using Microsoft.AspNetCore.Http;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -19,7 +20,7 @@ namespace HorribleCharadesMVC.Controllers
             ReadyVM ReadyVM = new ReadyVM()
             {
                 GameCode = "TONIS",
-                Teams = DataManager.GetTeamsTest()
+                Teams = DataManager.GetTeamsTest(HttpContext.Session.GetString("GameCode"))
             };
             return View(ReadyVM);
         }
@@ -40,7 +41,7 @@ namespace HorribleCharadesMVC.Controllers
             ScoreViewModel ScoreVM = new ScoreViewModel()
             {
                 GameCode = "TONIS",
-                Teams = DataManager.GetTeamsTest()
+                Teams = DataManager.GetTeamsTest(HttpContext.Session.GetString("GameCode"))
             };
             return View(ScoreVM);
         }
@@ -49,7 +50,7 @@ namespace HorribleCharadesMVC.Controllers
             StandingVM StandingVM = new StandingVM()
             {
                 GameCode = "TONIS",
-                Teams = DataManager.GetTeamsTest()
+                Teams = DataManager.GetTeamsTest(HttpContext.Session.GetString("GameCode"))
             };
             return View(StandingVM);
         }

@@ -122,7 +122,7 @@ namespace HorribleCharadesMVC.Models
             }
             catch (Exception ex)
             {
-
+                Console.WriteLine(ex.Message);
             }
             finally
             {
@@ -154,7 +154,7 @@ namespace HorribleCharadesMVC.Models
             }
             catch (Exception ex)
             {
-
+                Console.WriteLine(ex.Message);
             }
             finally
             {
@@ -189,7 +189,7 @@ namespace HorribleCharadesMVC.Models
             }
             catch (Exception ex)
             {
-
+                Console.WriteLine(ex.Message);
             }
             finally
             {
@@ -209,7 +209,7 @@ namespace HorribleCharadesMVC.Models
 
         }
 
-        public static List<Team> GetTeamsTest()
+        public static List<Team> GetTeamsTest(string GameCode)
         {
             List<Team> tmpList = new List<Team>();
             SqlConnection myConnection = new SqlConnection("Data Source=horriblecharades.database.windows.net;Initial Catalog = HorribleCharades; Persist Security Info=True;User ID = DBAdmin; Password=this!s4password");
@@ -217,7 +217,7 @@ namespace HorribleCharadesMVC.Models
             {
                 SqlCommand myCommand = new SqlCommand();
 
-                string strCmd = @"select * from Teams where GameCode = 'TONIS'";
+                string strCmd = @"select * from Teams where GameCode = '" + GameCode + "'";
 
                 myCommand.CommandText = strCmd;
 
