@@ -14,6 +14,16 @@ namespace HorribleCharadesMVC.Controllers
     public class PlayController : Controller
     {
         // GET: /<controller>/
+        public IActionResult Ready()
+        {
+            ReadyVM ReadyVM = new ReadyVM()
+            {
+                GameCode = "TONIS",
+                Teams = DataManager.GetTeamsTest()
+            };
+            return View(ReadyVM);
+        }
+
         public IActionResult Main(string id)
         {
             MainViewModel MainVM = new MainViewModel()
@@ -36,12 +46,12 @@ namespace HorribleCharadesMVC.Controllers
         }
         public IActionResult Standing()
         {
-            ScoreViewModel ScoreVM = new ScoreViewModel()
+            StandingVM StandingVM = new StandingVM()
             {
                 GameCode = "TONIS",
                 Teams = DataManager.GetTeamsTest()
             };
-            return View(ScoreVM);
+            return View(StandingVM);
         }
     }
 }

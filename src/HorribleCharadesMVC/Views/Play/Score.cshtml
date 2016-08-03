@@ -7,21 +7,13 @@
     <title>Score</title>
 </head>
 <body>
-
+    
     <h2>Team X, @Model.Teams[0].TeamName</h2>
     <h3>GUESSSED</h3>
     <h3>TIME </h3>
     <h3>POINTS</h3>
     <br />
-    @*<input type="button" value="Next" onclick="@("window.location.href='" + @Url.Action("Score", "Play", new { id = @Model.Team.PlayerId++ }) + "'");" />*@
-
-    @*<script>
-
-        function loopTeams(id) {
-            var url = '@Url.Action("Score", "Play", new { id = "__id__" })';
-            window.location.href = url.replace('__id__', id);
-        }
-    </script>*@
+    <span id="timer" style="font-size:3em; color:magenta; margin-left: 3em"></span>
 
     <script>
     //Scripts taggarna ska flyttas ut till en scriptfil. Kom ihåg att hänvisa till filen när vi flyttar it taggen också.
@@ -33,14 +25,9 @@
         if (timeLeft <= 0)
         {
             clearInterval(counter);
-            document.getElementById("timer").innerHTML = "Time is up!" //Här ska vi skicka vidare användaren till nästa view
-            redirect();
+            window.location.href = '/Play/Standing';
             return;
         }
-    }
-
-    function redirect() {
-        window.location.href = '/Play/Score/@Model.GameCode';
     }
 
     </script>

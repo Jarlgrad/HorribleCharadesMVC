@@ -1,7 +1,33 @@
-﻿<html xmlns="http://www.w3.org/1999/xhtml">
+﻿@model HorribleCharadesMVC.Viewmodels.Play.StandingVM
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title></title>
+    <title>Standings</title>
 </head>
 <body>
+    <ul>
+        @foreach (var item in Model.Teams)
+        {
+            <li><b>@item.TeamName</b></li>
+        }
+    </ul>
+
+    <span id="timer" style="font-size:3em; color:magenta; margin-left: 3em"></span> @*Måste finnas med för att timern ska köras*@
+
+    <script>
+    //Scripts taggarna ska flyttas ut till en scriptfil. Kom ihåg att hänvisa till filen när vi flyttar it taggen också.
+    var timeLeft = 3;
+    var counter = setInterval(timer, 1000);
+    function timer()
+    {
+        timeLeft -= 1;
+        if (timeLeft <= 0)
+        {
+            clearInterval(counter);
+            window.location.href = '/Play/Ready';
+            return;
+        }
+    }
+
+    </script>
 </body>
 </html>

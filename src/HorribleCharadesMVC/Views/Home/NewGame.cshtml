@@ -15,7 +15,7 @@
         <br />
         <br />
 
-            <input type="button" value="Play" onclick="window.location.href = '@Url.Action("Main", "Play", new { ID = Model.GameCode })';" />
+            <input type="button" value="Play" onclick="window.location.href = '@Url.Action("Ready", "Play", new { ID = Model.GameCode })';" />
         @*<form action="/home/NewGame">
             <input type="submit" value="Play" />
             <input id="GameCode" type="hidden" value="@Model.GameCode" />
