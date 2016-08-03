@@ -8,12 +8,12 @@
 </head>
 <body>
 
-    <h2>Team X, @Model.Team.TeamName</h2>
+    <h2>Team X, @Model.Teams[0]</h2>
     <h3>GUESSSED</h3>
     <h3>TIME </h3>
     <h3>POINTS</h3>
     <br />
-    <input type="button" value="Next" onclick="@("window.location.href='" + @Url.Action("Score", "Play", new { id = 2  @*@Model.Team.PlayerId++*@ }) + "'");" />
+    @*<input type="button" value="Next" onclick="@("window.location.href='" + @Url.Action("Score", "Play", new { id = @Model.Team.PlayerId++ }) + "'");" />*@
 
     @*<script>
 

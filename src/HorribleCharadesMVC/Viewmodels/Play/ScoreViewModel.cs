@@ -8,6 +8,6 @@ namespace HorribleCharadesMVC.Viewmodels.Play
 {
     public class ScoreViewModel
     {
-        public Team Team { get; set; }
+        public List<Team> Teams;
     }
 }

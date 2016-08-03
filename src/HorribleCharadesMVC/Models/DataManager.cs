@@ -14,7 +14,7 @@ namespace HorribleCharadesMVC.Models
 
         #region GetFromDB
 
-       
+
         public static Entity GetEntity(int id)
         {
             Entity objectword = new Entity();
@@ -34,7 +34,7 @@ namespace HorribleCharadesMVC.Models
                 myConnection.Open();
                 rdr = myCommand.ExecuteReader();
                 objectword.Description = myCommand.Parameters["@Description"].Value.ToString();
-                      }
+            }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
@@ -46,6 +46,48 @@ namespace HorribleCharadesMVC.Models
             return objectword;
         }
 
+        //public static List<Team> GetTeams(string gameCode)
+        //{
+        //    List<Team> tmpList = new List<Team>();
+
+        //    Team tmpTeam = new Team();
+
+        //    SqlConnection myConnection = new SqlConnection(conStr);
+
+        //    SqlDataReader rdr = null;
+
+        //    SqlCommand myCommand = new SqlCommand("sp_GetTeam", myConnection);
+        //    myCommand.CommandType = CommandType.StoredProcedure;
+        //    myCommand.Parameters.AddWithValue("@GameCode", gameCode);
+        //    myCommand.Parameters.Add("@TeamID", SqlDbType.Int);
+        //    myCommand.Parameters["@TeamID"].Direction = ParameterDirection.Output;
+        //    myCommand.Parameters.Add("@Name", SqlDbType.VarChar, 250);
+        //    myCommand.Parameters["@Name"].Direction = ParameterDirection.Output;
+
+        //    try
+        //    {
+
+        //        myConnection.Open();
+        //        rdr = myCommand.ExecuteReader();
+
+        //        while (rdr.Read())
+        //        {
+        //            tmpTeam.TeamId = (int)myCommand.Parameters["@TeamID"].Value;
+        //            tmpTeam.TeamName = myCommand.Parameters["@Name"].Value.ToString();
+        //            tmpList.Add(tmpTeam);
+        //        }
+
+        //    }
+        //    catch (Exception ex)
+        //    {
+
+        //    }
+        //    finally
+        //    {
+        //        myConnection.Close();
+        //    }
+        //    return tmpList;
+        //}
         public static List<Team> GetTeams(string gameCode)
         {
             List<Team> tmpList = new List<Team>();
@@ -76,7 +118,7 @@ namespace HorribleCharadesMVC.Models
                     tmpTeam.TeamName = myCommand.Parameters["@Name"].Value.ToString();
                     tmpList.Add(tmpTeam);
                 }
-      
+
             }
             catch (Exception ex)
             {
@@ -89,9 +131,9 @@ namespace HorribleCharadesMVC.Models
             return tmpList;
         }
 
-    public static Activity GetActivity(int id)
-    {
-        Activity activityWord = new Activity();
+        public static Activity GetActivity(int id)
+        {
+            Activity activityWord = new Activity();
 
 
             SqlConnection myConnection = new SqlConnection(conStr);
@@ -105,22 +147,22 @@ namespace HorribleCharadesMVC.Models
             myCommand.Parameters["@Description"].Direction = ParameterDirection.Output;
 
             try
-        {
+            {
                 myConnection.Open();
                 rdr = myCommand.ExecuteReader();
                 activityWord.Description = myCommand.Parameters["@Description"].Value.ToString();
             }
-        catch (Exception ex)
-        {
+            catch (Exception ex)
+            {
 
+            }
+            finally
+            {
+                myConnection.Close();
+            }
+            return activityWord;
         }
-        finally
-        {
-            myConnection.Close();
-        }
-        return activityWord;
-    }
-    #endregion
+        #endregion
 
         #region AddToDB
         public static void AddTeam(string gameCode, string name)
