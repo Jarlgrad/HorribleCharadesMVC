@@ -36,17 +36,51 @@ namespace HorribleCharadesMVC.Controllers
             return View(MainVM);
         }
 
-        public IActionResult Score()
+        public IActionResult Score(int id)
         {
-            ScoreViewModel ScoreVM = new ScoreViewModel()
+            var teams = DataManager.GetTeamsTest(HttpContext.Session.GetString("GameCode"));
+            #region
+            if (TempData["id"] != null)
             {
-                GameCode = "TONIS",
-                Teams = DataManager.GetTeamsTest(HttpContext.Session.GetString("GameCode"))
-            };
-            return View(ScoreVM);
+                if ((int)TempData["id"] >= teams.Count())
+                {
+                    return RedirectToAction(nameof(Standing));
+                }
+                else
+                {
+                    ScoreViewModel ScoreVM = new ScoreViewModel()
+                    {
+                        GameCode = "TONIS",
+                        Team = teams[(int)TempData["id"]],
+
+                    };
+                    TempData["id"] = (int)TempData["id"] + 1;
+                    return View(ScoreVM);
+                }
+
+            }
+            else
+            {
+                TempData["id"] = 0;
+                ScoreViewModel ScoreVM = new ScoreViewModel()
+                {
+                    GameCode = "TONIS",
+                    Team = teams[0],
+                };
+                return View(ScoreVM);
+            }
+            #endregion
+            //ScoreViewModel ScoreVM = new ScoreViewModel()
+            //{
+            //    GameCode = "TONIS",
+            //    Team = teams[0],
+            //    Id = id
+            //};
+            //return View(ScoreVM);
         }
         public IActionResult Standing()
         {
+            TempData["id"] = null;
             StandingVM StandingVM = new StandingVM()
             {
                 GameCode = "TONIS",

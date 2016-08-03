@@ -9,6 +9,7 @@ namespace HorribleCharadesMVC.Viewmodels.Play
     public class ScoreViewModel
     {
         public string GameCode { get; set; }
-        public List<Team> Teams { get; set; }
+        public Team Team { get; set; }
+        public int Id { get; set; }
     }
 }

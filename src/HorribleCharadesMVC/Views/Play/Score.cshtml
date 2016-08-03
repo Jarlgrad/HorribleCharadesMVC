@@ -1,14 +1,14 @@
 ﻿<html xmlns="http://www.w3.org/1999/xhtml">
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @model HorribleCharadesMVC.Viewmodels.Play.ScoreViewModel
-@*@Html.Hidden(Model.game.Code)*@
+
 
 <head>
     <title>Score</title>
 </head>
 <body>
     
-    <h2>@Model.Teams[0].TeamName</h2>
+    <h2>@Model.Team.TeamName</h2>
     <h3>GUESSSED</h3>
     <h3>TIME </h3>
     <h3>POINTS</h3>
@@ -19,13 +19,14 @@
     //Scripts taggarna ska flyttas ut till en scriptfil. Kom ihåg att hänvisa till filen när vi flyttar it taggen också.
     var timeLeft = 3;
     var counter = setInterval(timer, 1000);
+    @*//var newId = @Model.Id++;*@
     function timer()
     {
         timeLeft -= 1;
         if (timeLeft <= 0)
         {
             clearInterval(counter);
-            window.location.href = '/Play/Standing';
+            window.location.href = '/Play/score/';
             return;
         }
     }
