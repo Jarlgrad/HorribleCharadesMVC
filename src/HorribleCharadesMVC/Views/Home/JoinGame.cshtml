@@ -5,10 +5,15 @@
 <body>
     <div><h1>JoinGameView</h1></div>
 
-    <label>Input Code</label>
-    <br />
-    <input type="text" placeholder="Write Code" />
-    <br />
-    <input type="button" value="submit" onclick="@("window.location.href='" + @Url.Action("NewGame", "Home") + "'");" /> @*Kom ihåg att den skickar till fel vy nu*@
+    <form asp-controller="Home" asp-action="JoinGame">
+        <label asp-for="GameCode"></label>
+        <br />
+        <input asp-for="GameCode" />
+        <br />
+        <span asp-validation-for="GameCode"></span>
+        <br />
+    </form>
+    <input type="button" value="submit" />
+    @*<input type="button" value="Back" onclick="@("window.location.href='" + @Url.Action("Index", "Home") + "'");" />*@
 </body>
 </html>

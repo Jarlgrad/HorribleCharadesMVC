@@ -21,7 +21,7 @@ namespace HorribleCharadesMVC.Controllers
         public IActionResult NewGame()
         {
             Game game = new Game();
-            
+
             //DataManager.AddTeam(game.Code, game.Teams[0].TeamName); 
             var viewModel = new NewGameViewModel()
             {
@@ -29,12 +29,23 @@ namespace HorribleCharadesMVC.Controllers
             };
 
             HttpContext.Session.SetString("GameCode", "TONIS");
+            HttpContext.Session.SetInt32("TeamCount", 0);
             return View(viewModel);
-         
+
         }
         public IActionResult JoinGame()
         {
-            return View();
+            var viewModel = new JoinGameVM();
+            return View(viewModel);
+        }
+        [HttpPost]
+        public IActionResult JoinGame(JoinGameVM viewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+            return RedirectToAction(nameof(PlayController.ReadyWait));
         }
     }
 }

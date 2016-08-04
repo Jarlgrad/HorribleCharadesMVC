@@ -165,9 +165,10 @@ namespace HorribleCharadesMVC.Models
         #endregion
 
         #region AddToDB
-        public static void AddTeam(string gameCode, string name)
+        public static bool AddTeam(string gameCode, string name)
         {
             Team team = new Team();
+            int result = 0;
 
             SqlConnection myConnection = new SqlConnection(conStr);
 
@@ -184,7 +185,7 @@ namespace HorribleCharadesMVC.Models
             {
                 myConnection.Open();
 
-                myCommand.ExecuteNonQuery();
+                result = myCommand.ExecuteNonQuery();
 
             }
             catch (Exception ex)
@@ -194,6 +195,14 @@ namespace HorribleCharadesMVC.Models
             finally
             {
                 myConnection.Close();
+            }
+            if (result == 1)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
         #endregion

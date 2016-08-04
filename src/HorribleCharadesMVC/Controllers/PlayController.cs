@@ -15,7 +15,16 @@ namespace HorribleCharadesMVC.Controllers
     public class PlayController : Controller
     {
         // GET: /<controller>/
-        public IActionResult Ready()
+        public IActionResult ReadyPlay()
+        {
+            ReadyVM ReadyVM = new ReadyVM()
+            {
+                GameCode = "TONIS",
+                Teams = DataManager.GetTeamsTest(HttpContext.Session.GetString("GameCode"))
+            };
+            return View(ReadyVM);
+        }
+        public IActionResult ReadyWait()
         {
             ReadyVM ReadyVM = new ReadyVM()
             {
@@ -36,51 +45,41 @@ namespace HorribleCharadesMVC.Controllers
             return View(MainVM);
         }
 
-        public IActionResult Score(int id)
+        public IActionResult Score()
         {
             var teams = DataManager.GetTeamsTest(HttpContext.Session.GetString("GameCode"));
-            #region
-            if (TempData["id"] != null)
+            int tmpInt = (int)HttpContext.Session.GetInt32("TeamCount");
+
+            if (tmpInt == 0)
             {
-                if ((int)TempData["id"] >= teams.Count())
+                ScoreViewModel ScoreVM = new ScoreViewModel()
                 {
-                    return RedirectToAction(nameof(Standing));
-                }
-                else
-                {
-                    ScoreViewModel ScoreVM = new ScoreViewModel()
-                    {
-                        GameCode = "TONIS",
-                        Team = teams[(int)TempData["id"]],
+                    Team = teams[0],
 
-                    };
-                    TempData["id"] = (int)TempData["id"] + 1;
-                    return View(ScoreVM);
-                }
-
+                };
+                HttpContext.Session.SetInt32("TeamCount", 1);
+                return View(ScoreVM);
             }
             else
             {
-                TempData["id"] = 0;
-                ScoreViewModel ScoreVM = new ScoreViewModel()
+                if (tmpInt >= teams.Count())
                 {
-                    GameCode = "TONIS",
-                    Team = teams[0],
+                    HttpContext.Session.SetInt32("TeamCount", 0);
+                    return RedirectToAction(nameof(Standing));
+
+                }
+                
+                ScoreViewModel ScoreVM = new ScoreViewModel
+                {
+                    Team = teams[tmpInt]
                 };
+                HttpContext.Session.SetInt32("TeamCount", ++tmpInt);
                 return View(ScoreVM);
             }
-            #endregion
-            //ScoreViewModel ScoreVM = new ScoreViewModel()
-            //{
-            //    GameCode = "TONIS",
-            //    Team = teams[0],
-            //    Id = id
-            //};
-            //return View(ScoreVM);
+
         }
         public IActionResult Standing()
         {
-            TempData["id"] = null;
             StandingVM StandingVM = new StandingVM()
             {
                 GameCode = "TONIS",

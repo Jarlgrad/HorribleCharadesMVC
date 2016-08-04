@@ -1,0 +1,11 @@
+﻿@model HorribleCharadesMVC.Viewmodels.Play.ReadyVM
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+    <h1>@Model.Teams[0].TeamName is up!</h1>
+    <p>En ska göra charaden, resten ska gissa högt. När ni har gissat rätt trycker charadsnubben på stop!</p>
+    <input type="button" value="Play" onclick="window.location.href = '@Url.Action("Main", "Play")';" />
+</body>
+</html>
