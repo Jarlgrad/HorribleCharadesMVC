@@ -26,6 +26,7 @@ namespace HorribleCharadesMVC
         {
             app.UseSession();
             app.UseDeveloperExceptionPage();
+            app.UseStaticFiles();
             app.UseMvcWithDefaultRoute();
         }
     }
