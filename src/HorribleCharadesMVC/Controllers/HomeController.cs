@@ -43,7 +43,7 @@ namespace HorribleCharadesMVC.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View();
+                return View(viewModel);
             }
             return RedirectToAction(nameof(PlayController.ReadyWait));
         }
